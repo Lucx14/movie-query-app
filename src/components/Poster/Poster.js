@@ -5,8 +5,10 @@ const Wrapper = styled.div`
 `;
 
 const Image = styled.img`
-  flex: 1;
-  align-self: 'stretch';
+  flex-grow: 1;
+  border-radius: 3px 0px 0px 3px;
+  max-width: 100%;
+  height: auto;
 `;
 
 const Poster = (props) => {
@@ -19,7 +21,7 @@ const Poster = (props) => {
 
   return (
     <Wrapper>
-      <Image src={`https://image.tmdb.org/t/p/w500${posterLocation}`} alt="Poster" />
+      <Image src={`https://image.tmdb.org/t/p/original${posterLocation}`} alt="Poster" />
     </Wrapper>
   );
 };

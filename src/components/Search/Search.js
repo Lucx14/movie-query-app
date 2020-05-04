@@ -4,8 +4,21 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 const Wrapper = styled.div`
-  border: 1px solid black;
   width: 100%;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  background: none;
+  border-bottom: solid white 1px;
+  outline: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-size: 20px;
+  margin-top: 40px;
+  color: white;
+  font-weight: 300;
 `;
 
 const Search = (props) => {
@@ -17,12 +30,9 @@ const Search = (props) => {
   const [searchKey, setSearchKey] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
-
   const searchHandler = (event) => {
     event.persist();
-    console.log(`Event: ${event.target.value}`);
     let query = event.target.value.split(' ').join('+');
-    console.log(`QueryParam: ${query}`);
     setSearchKey(event.target.value);
     if (query.length > 0) {
       axios.get(`https://api.themoviedb.org/3/search/movie?api_key=91080d9d61f30246d8551c70f5e1d89c&query=${query}` ,
@@ -41,8 +51,9 @@ const Search = (props) => {
         .catch(err => {
           console.log(err);
         });
+    } else {
+      setSearchResults([]);
     }
-    console.log(searchResults);
   }
 
   let suggestions = searchResults.map((result, i) => {
@@ -51,7 +62,7 @@ const Search = (props) => {
 
   return (
     <Wrapper>
-      <input
+      <Input
         type="text"
         placeholder="Search Movie Title..."
         onChange={searchHandler} 
@@ -62,7 +73,6 @@ const Search = (props) => {
           {suggestions}
         </ul>
       </div>
-     
     </Wrapper>
   );
 };

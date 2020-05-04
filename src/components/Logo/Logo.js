@@ -2,14 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  border: solid 1px black;
   width: 100%;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1.3rem;
+  color: #00FC87;
 `;
 
 const Logo = () => {
   return (
     <Wrapper>
-      <h2>Logo</h2>
+      <h2>Movie Search Engine</h2>
     </Wrapper>
   );
 };

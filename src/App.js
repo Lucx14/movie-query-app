@@ -13,30 +13,30 @@ const Wrapper = styled.div.attrs(props => ({
   backdrop: props.backdrop ? `https://image.tmdb.org/t/p/original${props.backdrop}` : 'https://image.tmdb.org/t/p/original/jOzrELAzFxtMx2I4uDGHOotdfsS.jpg'
 }))`
   background: ${props => `url(${props.backdrop}) no-repeat center center fixed`};
+  box-shadow: inset 0 0 0 1000px rgba(0,0,0,.6);
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
-  height: 100vh;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   border: solid 1px black;
+  font-family: Lato;
 `;
 const Card = styled.div`
   display: flex;
-  flex-direction: row;
   width: 80%;
   margin: 10px 0;
-  height: 100%;
-  border: 1px solid white;
 `;
 const Footer = styled.div`
-  border: solid 1px white;
-  width: 80%;
+  box-shadow: inset 0 0 0 1000px rgba(0,0,0,.6);
+  width: 100%;
   text-align: center;
   color: white;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  padding: 20px 0;
 `;
 const TopContainer = styled.div`
   display: flex;
@@ -51,7 +51,6 @@ function App() {
   const config = {
     headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MTA4MGQ5ZDYxZjMwMjQ2ZDg1NTFjNzBmNWUxZDg5YyIsInN1YiI6IjVlYWIyMWY3YTEyODU2MDAxZDY5MTkwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.3e7I81YcbPKVb2lb63bEt8Uk0zpaxTZx_WxzNWdXvGo` }
   };
-
 
   useEffect(() => {
     axios.get(`https://api.themoviedb.org/3/movie/${movie.id}`,
@@ -80,25 +79,22 @@ function App() {
   }, [movie.id]);
 
   const movieChangeHandler = (event) => {
-    console.log(event.target.dataset.id);
     setMovie({ id: event.target.dataset.id });
   };
 
   return (
     <Wrapper backdrop={movie.backdrop}>
-
       <TopContainer>
         <Logo />
         <Search grabMovieId={movieChangeHandler} />
       </TopContainer>
-
       <Card>
         <Poster image={movie.poster}/>
         <MovieCard
           title={movie.title}
           overview={movie.overview}
           tagline={movie.tagline}
-          genre={movie.genres}
+          genres={movie.genres}
           producers={movie.producers}
           releaseDate={movie.releaseDate}
           runningTime={movie.runningTime}
@@ -106,10 +102,10 @@ function App() {
           score={movie.score}
         />
       </Card>
-      
       <Footer>
-        <p>Designed & developed by Lucien Najev</p>
+        <p>Designed & developed by someone on the internet!</p>
         <p>View Code</p>
+        <p>Powered by THE MOVIE DB</p>
       </Footer>
     </Wrapper>
   );

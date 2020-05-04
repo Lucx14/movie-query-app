@@ -1,19 +1,41 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Stat from './Layout/Stat';
+
 const Wrapper = styled.div`
-  border: solid 1px white;
-  /* width: 100%;
-  height: 100%; */
-  width: 50%;
   background-color: black;
+  opacity: 0.9;
   color: white;
   padding: 20px;
   flex-grow: 1;
 `;
 
+const StatWrapper = styled.div`
+  display: flex;
+`;
+
+const H1 = styled.h1`
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+`;
+
+const P = styled.p`
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+`;
+
+const H3 = styled.h3`
+  color: #00FC87;
+  padding-bottom: 2px;
+  font-size: 1.3rem;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+`;
+
 const MovieCard = (props) => {
-  const { title, genres, producers } = props;
+  const { title, genres, producers, runningTime, score, boxOffice } = props;
 
   const nestedDataToString = (data) => {
     let nestedArray = [];
@@ -25,43 +47,39 @@ const MovieCard = (props) => {
       });
     }
     resultString = nestedArray.join(', ');
-    // return data.map(genre => genre.name).join(', ');
     return resultString;
   }
 
+  const formattedRunTime = `${runningTime} mins`;
+  const formattedScore = `${score} / 10`;
+  const formattedRevenue = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(boxOffice);
 
   return (
     <Wrapper>
-      <h1>{title}</h1>
-
+      <H1>{title}</H1>
       <div>
-        <h3>{props.tagline}</h3>
-        <p>{props.overview}</p>
+        <H3>{props.tagline}</H3>
+        <P>{props.overview}</P>
       </div>
-
       <div>
-        <h3>{nestedDataToString(genres)}</h3>
-        <p>{nestedDataToString(producers)}</p>
+        <H3>{nestedDataToString(genres)}</H3>
+        <P>{nestedDataToString(producers)}</P>
       </div>
-
-      <div>
-        <p>Original Release:</p>
-        <p>{props.releaseDate}</p>
-        <p>Running Time</p>
-        <p>{props.runningTime}</p>
-      </div>
-
-      <div>
-        <p>Box Office:</p>
-        <p>{props.boxOffice}</p>
-        <p>Vote Average:</p>
-        <p>{props.score}</p>
-      </div>
-
-
+      <StatWrapper>
+        <Stat heading="Original Release" data={props.releaseDate} />
+        <Stat heading="Running time" data={formattedRunTime} />
+      </StatWrapper>
+      <StatWrapper>
+        <Stat heading="Box Office" data={formattedRevenue} />
+        <Stat heading="Vote Average" data={formattedScore} />
+      </StatWrapper>
     </Wrapper>
   );
 };
-
 
 export default MovieCard;
