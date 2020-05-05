@@ -5,7 +5,7 @@ const Wrapper = styled.div`
   width: 100%;
   font-family: 'Permanent Marker', cursive;
   font-size: 1.3rem;
-  color: #00FC87;
+  color: #00fc87;
 `;
 
 const Logo = () => {

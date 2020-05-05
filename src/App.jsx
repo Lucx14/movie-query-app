@@ -9,11 +9,14 @@ import Search from './components/Search/Search';
 import Logo from './components/Logo/Logo';
 import Poster from './components/Poster/Poster';
 
-const Wrapper = styled.div.attrs(props => ({
-  backdrop: props.backdrop ? `https://image.tmdb.org/t/p/original${props.backdrop}` : 'https://image.tmdb.org/t/p/original/jOzrELAzFxtMx2I4uDGHOotdfsS.jpg'
+const Wrapper = styled.div.attrs((props) => ({
+  backdrop: props.backdrop
+    ? `https://image.tmdb.org/t/p/original${props.backdrop}`
+    : 'https://image.tmdb.org/t/p/original/jOzrELAzFxtMx2I4uDGHOotdfsS.jpg',
 }))`
-  background: ${props => `url(${props.backdrop}) no-repeat center center fixed`};
-  box-shadow: inset 0 0 0 1000px rgba(0,0,0,.6);
+  background: ${(props) =>
+    `url(${props.backdrop}) no-repeat center center fixed`};
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.6);
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -30,7 +33,7 @@ const Card = styled.div`
   margin: 10px 0;
 `;
 const Footer = styled.div`
-  box-shadow: inset 0 0 0 1000px rgba(0,0,0,.6);
+  box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.6);
   width: 100%;
   text-align: center;
   color: white;
@@ -49,14 +52,15 @@ function App() {
   const [movie, setMovie] = useState(initialState);
 
   const config = {
-    headers: { Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MTA4MGQ5ZDYxZjMwMjQ2ZDg1NTFjNzBmNWUxZDg5YyIsInN1YiI6IjVlYWIyMWY3YTEyODU2MDAxZDY5MTkwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.3e7I81YcbPKVb2lb63bEt8Uk0zpaxTZx_WxzNWdXvGo` }
+    headers: {
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MTA4MGQ5ZDYxZjMwMjQ2ZDg1NTFjNzBmNWUxZDg5YyIsInN1YiI6IjVlYWIyMWY3YTEyODU2MDAxZDY5MTkwOCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.3e7I81YcbPKVb2lb63bEt8Uk0zpaxTZx_WxzNWdXvGo`,
+    },
   };
 
   useEffect(() => {
-    axios.get(`https://api.themoviedb.org/3/movie/${movie.id}`,
-    config
-    )
-      .then(res => {
+    axios
+      .get(`https://api.themoviedb.org/3/movie/${movie.id}`, config)
+      .then((res) => {
         setMovie({
           id: res.data.id,
           title: res.data.original_title,
@@ -69,13 +73,13 @@ function App() {
           boxOffice: res.data.revenue,
           score: res.data.vote_average,
           backdrop: res.data.backdrop_path,
-          poster: res.data.poster_path
-        })
+          poster: res.data.poster_path,
+        });
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        // console.log(err);
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [movie.id]);
 
   const movieChangeHandler = (event) => {
@@ -89,7 +93,7 @@ function App() {
         <Search grabMovieId={movieChangeHandler} />
       </TopContainer>
       <Card>
-        <Poster image={movie.poster}/>
+        <Poster image={movie.poster} />
         <MovieCard
           title={movie.title}
           overview={movie.overview}
