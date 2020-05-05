@@ -6,6 +6,8 @@ import axios from 'axios';
 
 const Wrapper = styled.div`
   width: 100%;
+  max-height: 2.5rem;
+  z-index: 1;
 `;
 
 const Input = styled.input`
@@ -21,6 +23,26 @@ const Input = styled.input`
   color: white;
   font-weight: 300;
 `;
+
+const Button = styled.button`
+  width: 100%;
+  border: 0;
+  padding: 10px;
+  background-color: black;
+  opacity: 0.8;
+  color: white;
+  text-align: left;
+  font-size: 1.2rem;
+  font-family: 'Lato', sans-serif;
+  outline: none;
+  :hover {
+    background-color: #00fc87;
+    opacity: 0.9;
+    color: black;
+  }
+`;
+
+const SuggestionsWrapper = styled.div``;
 
 const Search = (props) => {
   const { grabMovieId } = props;
@@ -61,17 +83,23 @@ const Search = (props) => {
     }
   };
 
+  const handleClick = (event) => {
+    grabMovieId(event);
+    setSearchResults([]);
+    setSearchKey(event.target.name);
+  };
+
   const suggestions = searchResults.map((result) => {
     return (
       <div key={result.id}>
-        <button
+        <Button
           type="button"
           data-id={result.id}
-          onClick={grabMovieId.bind(this)}
-          onKeyDown={grabMovieId.bind(this)}
+          onClick={handleClick}
+          name={result.title}
         >
           {result.title}
-        </button>
+        </Button>
       </div>
     );
   });
@@ -84,7 +112,9 @@ const Search = (props) => {
         onChange={searchHandler}
         value={searchKey}
       />
-      {searchResults.length > 0 && <div>{suggestions}</div>}
+      {searchResults.length > 0 && (
+        <SuggestionsWrapper>{suggestions}</SuggestionsWrapper>
+      )}
     </Wrapper>
   );
 };

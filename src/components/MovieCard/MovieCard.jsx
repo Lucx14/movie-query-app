@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   opacity: 0.9;
   color: white;
   padding: 20px;
-  flex-grow: 1;
+  max-width: 60%;
 `;
 
 const StatWrapper = styled.div`
@@ -119,7 +119,7 @@ MovieCard.propTypes = {
 MovieCard.defaultProps = {
   title: '-',
   genres: [{ id: 1, name: '' }],
-  overview: '-',
+  overview: '',
   tagline: '-',
   producers: [
     {

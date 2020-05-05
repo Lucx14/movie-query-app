@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  max-width: 40%;
+`;
 
 const Image = styled.img`
-  flex-grow: 1;
   border-radius: 3px 0px 0px 3px;
   max-width: 100%;
   height: auto;

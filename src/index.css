@@ -12,6 +12,7 @@ code {
     monospace;
 } */
 
-body {
+body, html {
   margin: 0;
+  height: 100%;
 }

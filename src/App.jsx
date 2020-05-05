@@ -12,7 +12,7 @@ import Poster from './components/Poster/Poster';
 const Wrapper = styled.div.attrs((props) => ({
   backdrop: props.backdrop
     ? `https://image.tmdb.org/t/p/original${props.backdrop}`
-    : 'https://image.tmdb.org/t/p/original/jOzrELAzFxtMx2I4uDGHOotdfsS.jpg',
+    : 'https://image.tmdb.org/t/p/original/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg',
 }))`
   background: ${(props) =>
     `url(${props.backdrop}) no-repeat center center fixed`};
@@ -23,9 +23,11 @@ const Wrapper = styled.div.attrs((props) => ({
   -o-background-size: cover;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  border: solid 1px black;
   font-family: Lato;
+  min-height: 100vh;
+  width: 100%;
 `;
 const Card = styled.div`
   display: flex;
@@ -43,7 +45,7 @@ const Footer = styled.div`
 `;
 const TopContainer = styled.div`
   display: flex;
-  width: 80%;
+  width: 75%;
 `;
 
 const initialState = { id: 157336 };
