@@ -109,7 +109,6 @@ function App() {
         />
       </Card>
       <Footer>
-        <p>Designed & developed by someone on the internet!</p>
         <p>View Code</p>
         <p>Powered by THE MOVIE DB</p>
       </Footer>
