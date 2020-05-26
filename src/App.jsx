@@ -48,6 +48,11 @@ const TopContainer = styled.div`
   width: 75%;
 `;
 
+const LinkTag = styled.a`
+  color: white;
+  text-decoration: none;
+`;
+
 const initialState = { id: 157336 };
 
 function App() {
@@ -109,7 +114,9 @@ function App() {
         />
       </Card>
       <Footer>
-        <p>View Code</p>
+        <LinkTag href="https://github.com/Lucx14/movie-query-app">
+          View Code
+        </LinkTag>
         <p>Powered by THE MOVIE DB</p>
       </Footer>
     </Wrapper>
